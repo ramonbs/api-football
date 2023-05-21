@@ -2,7 +2,7 @@ function Header() {
   return (
     <header>
         <h1>
-            Test
+            Seja bem vindo ao Meu Time!
         </h1>
     </header>
   )
