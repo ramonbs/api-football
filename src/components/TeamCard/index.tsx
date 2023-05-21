@@ -1,33 +1,38 @@
-import { useEffect, useState } from 'react'
-import { getPlayersFootballAPI } from '../../api/fetchPlayers';
+import { useEffect, useState } from "react";
+import { getPlayersFootballAPI } from "../../api/fetchPlayers";
 
-interface Props {
-    league_id: string;
-    season: string;
+interface Player {
+    player: {
+        id: number;
+        name: string;
+        age: number;
+        nationality: string;
+    }
 }
 
-function TeamCard(props: Props) {
-    const { league_id, season } = props;
+function TeamCard() {
     const [players, setPlayers] = useState([]);
     const api_key = localStorage.getItem("api_key");
+    const team = localStorage.getItem("team");
+    const season = localStorage.getItem("season");
 
     const getPlayers = async () => {
         if (!api_key) throw new Error("API Key not found");
 
-        if (league_id) {
+        if (team && season) {
             try {
                 const playersResponse = await getPlayersFootballAPI(
                     api_key,
-                    league_id,
-                    season,
+                    team,
+                    season
                 );
                 setPlayers(
-                    playersResponse.response.map((player: Player) => {
+                    playersResponse.response.map(({ player }: Player ) => {
                         return {
-                            id: player.player.id,
-                            name: player.player.name,
-                            age: player.player.age,
-
+                            id: player.id,
+                            name: player.name,
+                            age: player.age,
+                            nationality: player.nationality
                         };
                     }),
                 );
@@ -39,15 +44,26 @@ function TeamCard(props: Props) {
 
     useEffect(() => {
         getPlayers();
-    }, [league_id, season]);
+    }, [team]);
 
-
-
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <>
+            {team && (
+                <>
+                    <h1>Team Card</h1>
+                    <ul>
+                        {players.map(({ id, name, age, nationality }) => (
+                            <li key={id}>
+                                <p>{name}</p>
+                                <p>{age}</p>
+                                <p>{nationality}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
+        </>
+    );
 }
 
 export default TeamCard;

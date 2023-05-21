@@ -101,6 +101,7 @@ function Selects() {
     const handleSeasonChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
         setSeason_id(value);
+        localStorage.setItem("season", value);
     };
 
     const handleTeamChange = (e: ChangeEvent<HTMLSelectElement>) => {
