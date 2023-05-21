@@ -49,7 +49,7 @@ describe("LoginForms", () => {
         const input = screen.getByRole("textbox");
         expect(input).toBeInTheDocument();
 
-        await act(async () => {
+        act(async () => {
             userEvent.type(input, "98841479637f73ac2294fa9592583261");
             userEvent.click(button);
         });
@@ -61,7 +61,6 @@ describe("LoginForms", () => {
               });
 
             expect(titleSetting).toBeInTheDocument();
-            
         });
     });
 });
