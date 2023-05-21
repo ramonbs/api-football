@@ -19,7 +19,7 @@ function Selects() {
     const [seasons, setSeasons] = useState<string[]>([]);
     const [countries, setCountries] = useState<string[]>([]);
     const [leagues, setLeagues] = useState<[]>([]);
-    const [teams, setTeams] = useState<string[]>([]);
+    const [teams, setTeams] = useState<[]>([]);
 
     const getAllInfo = async () => {
         if (!api_key) throw new Error("API Key not found");
@@ -78,10 +78,9 @@ function Selects() {
                 );
                 setTeams(
                     teamsResponse.response.map(
-                        (team: { name: string }) => team.name,
+                        (team: { id: number, name: string }) => ({ id: team.id, name: team.name })
                     ),
                 );
-                console.log(teamsResponse.response);
             } catch (error) {
                 throw error;
             }
@@ -102,6 +101,11 @@ function Selects() {
     const handleSeasonChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
         setSeason_id(value);
+    };
+
+    const handleTeamChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const { value } = e.target;
+        localStorage.setItem("team", value);
     };
 
     useEffect(() => {
@@ -172,12 +176,14 @@ function Selects() {
                     Selecione um time:
                     <select
                         name="teams"
-                        id="teams">
-                        {teams.map((team: string, index: number) => (
+                        id="teams"
+                        onChange={(e) => handleTeamChange(e)}
+                        >
+                        {teams.map(({id, name}, index: number) => (
                             <option
                                 key={index}
-                                value={team}>
-                                {team}
+                                value={id}>
+                                {name}
                             </option>
                         ))}
                     </select>
