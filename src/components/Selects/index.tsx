@@ -144,7 +144,9 @@ function Selects() {
                 </select>
             </label>
 
-            <label htmlFor="seasons">
+            <label htmlFor="seasons"
+                className={style.selects_label}
+            >
                 Selecione uma temporada:
                 <select
                     name="seasons"
@@ -161,7 +163,9 @@ function Selects() {
             </label>
 
             {leagues.length > 0 ? (
-                <label htmlFor="leagues">
+                <label htmlFor="leagues"
+                    className={style.selects_label}
+                >
                     Selecione uma liga:
                     <select
                         name="leagues"
@@ -181,7 +185,9 @@ function Selects() {
             )}
 
             {teams.length > 0 ? (
-                <label htmlFor="teams">
+                <label htmlFor="teams"
+                    className={style.selects_label}
+                >
                     Selecione um time:
                     <select
                         name="teams"

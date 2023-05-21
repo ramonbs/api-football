@@ -7,4 +7,23 @@
     margin-block: 1rem;
     width: 100%;
     max-width: 30rem;
+    border: .1rem solid #ccc;
+    border-radius: .5rem;
+    padding: 1rem;
+
+    .selects_label {
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+        font-weight: 700;
+        text-align: center;
+        margin-block: 0.5rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+        font-weight: 400;
+        text-align: center;
+        margin-block: 0.5rem;
+    }
 }

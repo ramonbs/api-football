@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTeamsStatisticsFootballAPI } from "../../api/fetchTeamStatistics";
+import style from "./teamStatisticsCard.module.scss";
 
 interface TeamStatistics {
     lineups: {
@@ -33,8 +34,6 @@ function TeamsStatisticsCard() {
             } catch (error) {
                 throw error;
             }
-
-            console.log(teamStatistics);
         }
     };
 
@@ -45,7 +44,7 @@ function TeamsStatisticsCard() {
     return (
         <>
             {teamStatistics && (
-                <div className="team_statistics_div">
+                <div className={style.team_statistics_div}>
                     <h1>Team Statistics Card</h1>
                     <table>
                         <thead>
