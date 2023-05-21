@@ -1,0 +1,10 @@
+.selects_div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    align-items: center;
+    margin-inline: auto;
+    margin-block: 1rem;
+    width: 100%;
+    max-width: 30rem;
+}

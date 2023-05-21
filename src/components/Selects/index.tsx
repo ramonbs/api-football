@@ -9,6 +9,7 @@ interface League {
         name: string;
     };
 }
+import style from "./selects.module.scss";
 
 interface Team {
     team: {
@@ -88,9 +89,7 @@ function Selects() {
                             name: team.name,
                         }),
                     ),
-                );
-                console.log(teams);
-                
+                );                
             } catch (error) {
                 throw error;
             }
@@ -128,8 +127,8 @@ function Selects() {
     }, [league_id]);
 
     return (
-        <>
-            <label htmlFor="countries">
+        <div className={ style.selects_div }>
+            <label htmlFor="countries" className={style.selects_label}>
                 Selecione um país:
                 <select
                     name="countries"
@@ -200,7 +199,7 @@ function Selects() {
             ) : (
                 <p>Selecione uma liga para ver os times</p>
             )}
-        </>
+        </div>
     );
 }
 
