@@ -1,14 +1,20 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import {
-    getCountriesFootballAPI,
-    getLeaguesFootballAPI,
-    getSeasonsFootballAPI,
-    getTeamsFootballAPI,
-} from "../../api/fetchFootballAPI";
-
+import { getSeasonsFootballAPI } from "../../api/fetchSeasons";
+import { getCountriesFootballAPI } from "../../api/fetchCountries";
+import { getLeaguesFootballAPI } from "../../api/fetchLeagues";
+import { getTeamsFootballAPI } from "../../api/fetchTeams";
 interface League {
-    id: number;
-    name: string;
+    league: {
+        id: number;
+        name: string;
+    };
+}
+
+interface Team {
+    team: {
+        id:number;
+        name: string
+    }
 }
 
 function Selects() {
@@ -53,14 +59,13 @@ function Selects() {
                 api_key,
                 country_id,
             );
-            setLeagues(
-                leaguesResponse.response.map((league: League) => {
-                    return {
-                        id: league.id,
-                        name: league.name,
-                    };
+            const obj = await leaguesResponse.response.map(
+                ({ league }: League) => ({
+                    id: league.id,
+                    name: league.name,
                 }),
             );
+            setLeagues(obj);
         } catch (error) {
             throw error;
         }
@@ -78,9 +83,14 @@ function Selects() {
                 );
                 setTeams(
                     teamsResponse.response.map(
-                        (team: { id: number, name: string }) => ({ id: team.id, name: team.name })
+                        ({team}: Team) => ({
+                            id: team.id,
+                            name: team.name,
+                        }),
                     ),
                 );
+                console.log(teams);
+                
             } catch (error) {
                 throw error;
             }
@@ -140,8 +150,7 @@ function Selects() {
                 <select
                     name="seasons"
                     id="seasons"
-                    onChange={(e) => handleSeasonChange(e)}
-                >
+                    onChange={(e) => handleSeasonChange(e)}>
                     {seasons.map((season: string, index: number) => (
                         <option
                             key={index}
@@ -159,9 +168,9 @@ function Selects() {
                         name="leagues"
                         id="leagues"
                         onChange={(e) => handleLeagueChange(e)}>
-                        {leagues.map(({ id, name }) => (
+                        {leagues.map(({ id, name }, index: number) => (
                             <option
-                                key={id}
+                                key={index}
                                 value={id}>
                                 {name}
                             </option>
@@ -178,9 +187,8 @@ function Selects() {
                     <select
                         name="teams"
                         id="teams"
-                        onChange={(e) => handleTeamChange(e)}
-                        >
-                        {teams.map(({id, name}, index: number) => (
+                        onChange={(e) => handleTeamChange(e)}>
+                        {teams.map(({ id, name }, index: number) => (
                             <option
                                 key={index}
                                 value={id}>

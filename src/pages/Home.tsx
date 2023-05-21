@@ -7,7 +7,7 @@ function Home() {
         <>
             <Header />
             <Selects />
-            <TeamCard />
+            {/* <TeamCard /> */}
         </>
     );
 }

@@ -7,7 +7,7 @@ interface Player {
         name: string;
         age: number;
         nationality: string;
-    }
+    };
 }
 
 function TeamCard() {
@@ -24,15 +24,15 @@ function TeamCard() {
                 const playersResponse = await getPlayersFootballAPI(
                     api_key,
                     team,
-                    season
+                    season,
                 );
                 setPlayers(
-                    playersResponse.response.map(({ player }: Player ) => {
+                    playersResponse.response.map(({ player }: Player) => {
                         return {
                             id: player.id,
                             name: player.name,
                             age: player.age,
-                            nationality: player.nationality
+                            nationality: player.nationality,
                         };
                     }),
                 );

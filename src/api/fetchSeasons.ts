@@ -1,4 +1,4 @@
-const SEASONS_URL = "https://v3.football.api-sports.io/seasons";
+const SEASONS_URL = "https://v3.football.api-sports.io/leagues/seasons";
 
 export const getSeasonsFootballAPI = async (key: string) => {
     const response = await fetch(SEASONS_URL, {
