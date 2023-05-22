@@ -42,9 +42,9 @@ function TeamCard() {
         }
     };
 
-    // useEffect(() => {
-    //     getPlayers();
-    // }, [team]);
+    useEffect(() => {
+        getPlayers();
+    }, [team]);
 
     return (
         <>

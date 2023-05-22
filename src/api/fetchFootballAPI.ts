@@ -1,4 +1,4 @@
-const BASE_URL = " https://v3.football.api-sports.io";
+const BASE_URL = "https://v3.football.api-sports.io";
 
 export const fetchFootballAPI = async (key: string) => {
     const response = await fetch(BASE_URL, {

@@ -37,9 +37,9 @@ function TeamsStatisticsCard() {
         }
     };
 
-    // useEffect(() => {
-    //     getTeamsStatistics();
-    // }, [team]);
+    useEffect(() => {
+        getTeamsStatistics();
+    }, [team]);
 
     return (
         <>

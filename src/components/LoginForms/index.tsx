@@ -20,10 +20,11 @@ function LoginForms() {
         <form
             className={style.login_form}
             onSubmit={handleSubmit}>
+            <h1>Meu Time</h1>
             <label
                 htmlFor="api_key"
                 className={style.login_label}>
-                    Insira sua key: 
+                Insira sua key:
                 <input
                     name="api_key"
                     type="text"
