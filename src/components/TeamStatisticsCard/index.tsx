@@ -16,21 +16,6 @@ function TeamsStatisticsCard() {
     const league = localStorage.getItem("league");
     const [teamStatistics, setTeamsStatistics] = useState([]);
 
-    const teamss = [
-        {
-            formation: "4-4-2",
-            played: 1,
-        },
-        {
-            formation: "4-3-3",
-            played: 2,
-        },
-        {
-            formation: "4-2-3-1",
-            played: 3,
-        },
-    ]
-
     const getTeamsStatistics = async () => {
         if (!api_key) throw new Error("API Key not found");
 
@@ -52,9 +37,9 @@ function TeamsStatisticsCard() {
         }
     };
 
-    useEffect(() => {
-        getTeamsStatistics();
-    }, [team]);
+    // useEffect(() => {
+    //     getTeamsStatistics();
+    // }, [team]);
 
     return (
         <>

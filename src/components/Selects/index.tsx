@@ -1,15 +1,15 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { getSeasonsFootballAPI } from "../../api/fetchSeasons";
 import { getCountriesFootballAPI } from "../../api/fetchCountries";
 import { getLeaguesFootballAPI } from "../../api/fetchLeagues";
 import { getTeamsFootballAPI } from "../../api/fetchTeams";
+import style from "./selects.module.scss";
 interface League {
     league: {
         id: number;
         name: string;
     };
 }
-import style from "./selects.module.scss";
 
 interface Team {
     team: {
@@ -28,30 +28,26 @@ function Selects() {
     const [leagues, setLeagues] = useState<[]>([]);
     const [teams, setTeams] = useState<[]>([]);
 
-    const getAllInfo = async () => {
+    const getAllInfo = useCallback(async () => {
         if (!api_key) throw new Error("API Key not found");
-
+      
         try {
-            Promise.all([
-                getSeasonsFootballAPI(api_key),
-                getCountriesFootballAPI(api_key),
-            ]).then((responses) => {
-                const [seasons, countries] = responses;
-                setSeasons(seasons.response);
-                setCountries(
-                    countries.response.map(
-                        (country: { name: string }) => country.name,
-                    ),
-                );
-            });
+          const [seasons, countries] = await Promise.all([
+            getSeasonsFootballAPI(api_key),
+            getCountriesFootballAPI(api_key),
+          ]);
+          setSeasons(seasons.response);
+          setCountries(countries.response.map((country: { name: string }) => country.name));
+          console.log(seasons);
+          console.log(countries);
         } catch (error) {
-            throw error;
+          throw error;
         }
-    };
-
-    useEffect(() => {
+      }, [api_key]);
+      
+      useEffect(() => {
         getAllInfo();
-    }, []);
+      }, [getAllInfo]);
 
     const getLeagues = async () => {
         if (!api_key) throw new Error("API Key not found");

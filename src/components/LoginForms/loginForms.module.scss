@@ -12,6 +12,10 @@
     border: 0.1rem solid #ccc;
     border-radius: 0.5rem;
 
+    h1 {
+        text-align: center;
+    }
+
     .login_label {
         display: flex;
         flex-direction: column;

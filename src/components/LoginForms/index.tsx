@@ -20,7 +20,6 @@ function LoginForms() {
         <form
             className={style.login_form}
             onSubmit={handleSubmit}>
-                <h1>Seja bem vindo ao Meu Time!</h1>
             <label
                 htmlFor="api_key"
                 className={style.login_label}>
